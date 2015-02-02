@@ -1,16 +1,16 @@
-package org.apache.cordova.gpPrint;
+ï»¿package org.apache.cordova.gpPrint;
 
 public class Paper {
 	static public String roomCode="";
 	static public int paperIndex=0;
 	static public int paperTotal=0;
-    static public Enum<?> errorState;   // ´íÎó×´Ì¬
+    static public Enum<?> errorState;   // é”™è¯¯çŠ¶æ€
 	static private Paper p;
 	static public boolean isFinished = false;
 	static public boolean isCanceled = false;
 	static public boolean isPaused = false;
-	static public int flag =0;  //Â·ÓÉ´íÎóĞÅÏ¢±êÖ¾
-	static public String runingState="Õı³£";
+	static public int flag =0;  //è·¯ç”±é”™è¯¯ä¿¡æ¯æ ‡å¿—
+	static public String runingState="æ­£å¸¸";
 	static public String operState="";
 	static public boolean isError =false;
 

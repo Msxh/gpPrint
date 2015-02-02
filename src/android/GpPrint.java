@@ -1,4 +1,4 @@
-package org.apache.cordova.gpPrint;
+ï»¿package org.apache.cordova.gpPrint;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -96,13 +96,13 @@ public class GpPrint extends CordovaPlugin implements PrinterRecieveListener {
 					Paper.roomCode = roomCode;
 
 					if (!Paper.errorState.toString().equals("SUCCESS")) {
-						Paper.isError = true; // ÓĞ´íÎó·¢Éú
+						Paper.isError = true; // æœ‰é”™è¯¯å‘ç”Ÿ
 						if (esc == null)
 							esc = new EscCommand();
 						Paper.flag = 4;
 						esc.queryRealtimeStatus(EscCommand.STATUS.PRINTER_PAPER);
-						Command = esc.getCommand();// »ñµÃ±à¼­µÄÃüÁîÊı¾İ
-						mDevice.sendDataImmediately(Command);// ·¢ËÍÃüÁî
+						Command = esc.getCommand();// è·å¾—ç¼–è¾‘çš„å‘½ä»¤æ•°æ®
+						mDevice.sendDataImmediately(Command);// å‘é€å‘½ä»¤
 						try {
 							Thread.sleep(500);
 						} catch (InterruptedException e) {
@@ -111,8 +111,8 @@ public class GpPrint extends CordovaPlugin implements PrinterRecieveListener {
 						}
 						Paper.flag = 1;
 						esc.queryRealtimeStatus(EscCommand.STATUS.PRINTER_STATUS);
-						Command = esc.getCommand();// »ñµÃ±à¼­µÄÃüÁîÊı¾İ
-						mDevice.sendDataImmediately(Command);// ·¢ËÍÃüÁî
+						Command = esc.getCommand();// è·å¾—ç¼–è¾‘çš„å‘½ä»¤æ•°æ®
+						mDevice.sendDataImmediately(Command);// å‘é€å‘½ä»¤
 						try {
 							Thread.sleep(500);
 						} catch (InterruptedException e) {
@@ -121,8 +121,8 @@ public class GpPrint extends CordovaPlugin implements PrinterRecieveListener {
 						}
 						Paper.flag = 2;
 						esc.queryRealtimeStatus(EscCommand.STATUS.PRINTER_OFFLINE);
-						Command = esc.getCommand();// »ñµÃ±à¼­µÄÃüÁîÊı¾İ
-						mDevice.sendDataImmediately(Command);// ·¢ËÍÃüÁî
+						Command = esc.getCommand();// è·å¾—ç¼–è¾‘çš„å‘½ä»¤æ•°æ®
+						mDevice.sendDataImmediately(Command);// å‘é€å‘½ä»¤
 						try {
 							Thread.sleep(500);
 						} catch (InterruptedException e) {
@@ -131,8 +131,8 @@ public class GpPrint extends CordovaPlugin implements PrinterRecieveListener {
 						}
 						Paper.flag = 3;
 						esc.queryRealtimeStatus(EscCommand.STATUS.PRINTER_ERROR);
-						Command = esc.getCommand();// »ñµÃ±à¼­µÄÃüÁîÊı¾İ
-						mDevice.sendDataImmediately(Command);// ·¢ËÍÃüÁî
+						Command = esc.getCommand();// è·å¾—ç¼–è¾‘çš„å‘½ä»¤æ•°æ®
+						mDevice.sendDataImmediately(Command);// å‘é€å‘½ä»¤
 
 					} else//*/
 						backMsgToJs();
@@ -153,7 +153,7 @@ public class GpPrint extends CordovaPlugin implements PrinterRecieveListener {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					printInfo.toprint(mDevice);// »ñµÃ±à¼­µÄÃüÁîÊı¾İ
+					printInfo.toprint(mDevice);// è·å¾—ç¼–è¾‘çš„å‘½ä»¤æ•°æ®
 				}
 			});
 			callbackContext.success();
@@ -228,9 +228,9 @@ public class GpPrint extends CordovaPlugin implements PrinterRecieveListener {
 		Log.i(TAG, "rec: " + vector.toString());
 		long tmp = Long.valueOf(vector.get(0).toString());
 		Log.i(TAG, "operState: " + Paper.operState);
-		Log.i(TAG, " ·¢ËÍµÄ±êÖ¾ £º " + Paper.flag + "  --- " + Paper.isCanceled);
-		Log.i(TAG, "¸ñÊ½»¯ µÄ " + tmp + "  ×´Ì¬±È½Ï £º " + (tmp & 108));
-		if (!Paper.isError) // ³ö´íÇ° Õï¶Ï
+		Log.i(TAG, " å‘é€çš„æ ‡å¿— ï¼š " + Paper.flag + "  --- " + Paper.isCanceled);
+		Log.i(TAG, "æ ¼å¼åŒ– çš„ " + tmp + "  çŠ¶æ€æ¯”è¾ƒ ï¼š " + (tmp & 108));
+		if (!Paper.isError) // å‡ºé”™å‰ è¯Šæ–­
 		{
 			switch (Paper.flag) {
 			case 2:
@@ -242,7 +242,7 @@ public class GpPrint extends CordovaPlugin implements PrinterRecieveListener {
 			}
 		}
 
-		else { // ³ö´íÁË Õï¶Ï ´íÎóÔ­Òò
+		else { // å‡ºé”™äº† è¯Šæ–­ é”™è¯¯åŸå› 
 			switch (Paper.flag) {
 			case 2:
 				offlineCheck(tmp);
@@ -283,47 +283,47 @@ public class GpPrint extends CordovaPlugin implements PrinterRecieveListener {
 		return jsonObject;
 	}
 
-	private void printerPaerCheck(long tmp) { // ´«ËÍÖ½×´Ì¬¼ì²â 4
+	private void printerPaerCheck(long tmp) { // ä¼ é€çº¸çŠ¶æ€æ£€æµ‹ 4
 		// TODO Auto-generated method stub
 		long t = tmp & 108;
 		if (t != 0) {
-			Paper.runingState = "È±Ö½×´Ì¬";
+			Paper.runingState = "ç¼ºçº¸çŠ¶æ€";
 		}
 	}
 
-	private void offlineCheck(long tmp) { // ÍÑ»ú 2
+	private void offlineCheck(long tmp) { // è„±æœº 2
 		// TODO Auto-generated method stub
 		long t = tmp & 4;
 		if (t != 0) {
-			Paper.runingState = "ÉÏ¸Ç¿ª";
+			Paper.runingState = "ä¸Šç›–å¼€";
 		} else {
 			t = tmp & 32;
 			if (t != 0)
-				Paper.runingState = "´òÓ¡»úÈ±Ö½";
+				Paper.runingState = "æ‰“å°æœºç¼ºçº¸";
 		}
 	}
 
-	private void printerStatusCheck(long tmp) // ´òÓ¡½ø×´Ì¬¼ì²â 1
+	private void printerStatusCheck(long tmp) // æ‰“å°è¿›çŠ¶æ€æ£€æµ‹ 1
 	{
 		long t = tmp & 8;
 		if (t != 0) {
-			Paper.runingState = "´òÓ¡»úÒÑÍÑ»ú";
+			Paper.runingState = "æ‰“å°æœºå·²è„±æœº";
 		}
 	}
 
-	private void printerErrorCheck(long tmp) // ´íÎó×´Ì¬¼ì²â 3
+	private void printerErrorCheck(long tmp) // é”™è¯¯çŠ¶æ€æ£€æµ‹ 3
 	{
 		long t = tmp & 8;
 		if (t != 0) {
-			Paper.runingState = "ÇĞµ¶ÓĞ´íÎó";
+			Paper.runingState = "åˆ‡åˆ€æœ‰é”™è¯¯";
 		} else {
 			t = tmp & 32;
 			if (t != 0) {
-				Paper.runingState = "ÓĞ²»¿É»Ö¸´´íÎó";
+				Paper.runingState = "æœ‰ä¸å¯æ¢å¤é”™è¯¯";
 			} else {
 				t = tmp & 64;
 				if (t != 0) {
-					Paper.runingState = "´òÓ¡Í·ÎÂ¶È»òµçÑ¹³¬³ö·¶Î§";
+					Paper.runingState = "æ‰“å°å¤´æ¸©åº¦æˆ–ç”µå‹è¶…å‡ºèŒƒå›´";
 
 				}
 			}

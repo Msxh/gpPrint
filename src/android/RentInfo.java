@@ -1,5 +1,4 @@
 package org.apache.cordova.gpPrint;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -42,8 +41,8 @@ public class RentInfo {
 
 		}
 		Vector<Byte> Command = new Vector<Byte>(4096, 1024);
-		Command = esc.getCommand();// »ñµÃ±à¼­µÄÃüÁîÊı¾İ
-		mDevice.sendDataImmediately(Command);// ·¢ËÍÃüÁî
+		Command = esc.getCommand();// è·å¾—ç¼–è¾‘çš„å‘½ä»¤æ•°æ®
+		mDevice.sendDataImmediately(Command);// å‘é€å‘½ä»¤
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -53,8 +52,8 @@ public class RentInfo {
 		Paper.isFinished = false;
 		Paper.isPaused = false;
 
-		Paper.flag = 2; // ÍÑ»ú±êÖ¾
-		queryGpState(2); // ÍÑ»ú¼ì²â
+		Paper.flag = 2; // è„±æœºæ ‡å¿—
+		queryGpState(2); // è„±æœºæ£€æµ‹
 
 		for (int i = 0; i < userinfo.getBulids().size(); i++) {
 			Build build = userinfo.getBulids().get(i);
@@ -66,7 +65,7 @@ public class RentInfo {
 
 					while (Paper.isPaused) {
 						try {
-							Paper.operState = "ÒÑÔİÍ£";
+							Paper.operState = "å·²æš‚åœ";
 							Thread.sleep(1000);
 						} catch (InterruptedException e1) {
 							// TODO Auto-generated catch block
@@ -74,11 +73,11 @@ public class RentInfo {
 						}
 					}
 					while (Paper.isCanceled) {
-						Paper.operState = "ÒÑÈ¡Ïû";
+						Paper.operState = "å·²å–æ¶ˆ";
 						return;
 					}
 					Paper.flag = 4;
-					queryGpState(4); // ×ßÖ½×´Ì¬²éÑ¯
+					queryGpState(4); // èµ°çº¸çŠ¶æ€æŸ¥è¯¢
 					Enum e = mDevice.sendDataImmediately(printRentInfo(build,
 							room, room.getRentItemList().get(j), 1));
 					status.Message(e, room.code, ++t, build.getRoom().size());
@@ -213,18 +212,18 @@ public class RentInfo {
 		esc.addLineSpacing((byte) 80);
 		esc.addSetUnderLineMode(UNDERLINE_MODE.OFF);
 		if (type == 1) {
-			esc.addText("--------------------------·¿¶«Áª");
+			esc.addText("--------------------------æˆ¿ä¸œè”");
 		} else {
-			esc.addText("--------------------------¿Í»§Áª");
+			esc.addText("--------------------------å®¢æˆ·è”");
 
 		}
 
-		esc.addText("°ü×âÆÅ - ÄúµÄĞÇ¼¶ÎïÒµ¹Ü¼Ò \n");// ´òÓ¡ÎÄ×Ö
+		esc.addText("åŒ…ç§Ÿå©† - æ‚¨çš„æ˜Ÿçº§ç‰©ä¸šç®¡å®¶ \n");// æ‰“å°æ–‡å­—
 
-		esc.addTurnEmphasizedModeOnOrOff(EscCommand.ENABLE.ON);// ¼Ó´ÖÄ£Ê½ÓĞĞ§
-		esc.addText(rent.getYear() + "Äê" + rent.getMonth() + "ÔÂ "
+		esc.addTurnEmphasizedModeOnOrOff(EscCommand.ENABLE.ON);// åŠ ç²—æ¨¡å¼æœ‰æ•ˆ
+		esc.addText(rent.getYear() + "å¹´" + rent.getMonth() + "æœˆ "
 				+ build.getName() + " " + room.getCode() + "\n");
-		esc.addTurnEmphasizedModeOnOrOff(EscCommand.ENABLE.OFF);// ¼Ó´ÖÄ£Ê½ÓĞĞ§
+		esc.addTurnEmphasizedModeOnOrOff(EscCommand.ENABLE.OFF);// åŠ ç²—æ¨¡å¼æœ‰æ•ˆ
 		esc.addText("--------------------------------");
 
 		for (int f = 0; f < rent.getFinancelist().size(); f++) {
@@ -233,15 +232,15 @@ public class RentInfo {
 			sb.append(fian.getClassname() + ":" + fian.getMoney() + "\n");
 			switch ((int) fian.getCalctype()) {
 			case 2:
-				sb.append("  ÔÂ³õ:" + fian.value_init + " ÔÂµ×:" + fian.value_end
+				sb.append("  æœˆåˆ:" + fian.value_init + " æœˆåº•:" + fian.value_end
 						+ "\n");
-				sb.append("  ÓÃÁ¿:" + fian.value_real + fian.unit + "  µ¥¼Û:"
-						+ fian.price + "Ôª/" + fian.unit + "\n");
+				sb.append("  ç”¨é‡:" + fian.value_real + fian.unit + "  å•ä»·:"
+						+ fian.price + "å…ƒ/" + fian.unit + "\n");
 				break;
 			case 3:
-				sb.append("  ÔÂ³õ:" + fian.value_init + " ÔÂµ×:" + fian.value_end
+				sb.append("  æœˆåˆ:" + fian.value_init + " æœˆåº•:" + fian.value_end
 						+ "\n");
-				sb.append("  ÓÃÁ¿:" + fian.value_real + fian.unit + "  µ¥¼Û:"
+				sb.append("  ç”¨é‡:" + fian.value_real + fian.unit + "  å•ä»·:"
 						+ fian.customprice + "\n");
 				break;
 
@@ -249,32 +248,32 @@ public class RentInfo {
 			esc.addText(sb.toString());
 		}
 		esc.addTurnEmphasizedModeOnOrOff(EscCommand.ENABLE.ON);
-		esc.addText("ºÏ¼Æ£º1302Ôª    ÊÕ¿îÈË£º________\n");
+		esc.addText("åˆè®¡ï¼š1302å…ƒ    æ”¶æ¬¾äººï¼š________\n");
 		esc.addTurnEmphasizedModeOnOrOff(EscCommand.ENABLE.OFF);
 
 		if (type == 2) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("--------------------------------\n");
-			sb.append("×ğ¾´µÄ×â»§,Äú¿ÉÒÔÍ¨¹ıÒÔÏÂ·½Ê½½»×â:\n");
-			sb.append("1£¬ÏÖ½ğ½»×â\n");
-			sb.append("  ÇëÓÚ1ÈÕ-5ÈÕÍíÉÏ7µã-10µãµ½±£°²ÊÒ´¦½»×â\n");
-			sb.append("2£¬ÒøĞĞ×ªÕË\n");
-			sb.append("  ÕĞÉÌÒøĞĞÉîÛÚ·ÖĞĞ³µ¹«ÃíÖ§ĞĞ\n");
-			sb.append("  ÕËºÅ£º4339 2882 9389 234\n");
-			sb.append("  »§Ãû£ºÕÅÈı\n");
+			sb.append("å°Šæ•¬çš„ç§Ÿæˆ·,æ‚¨å¯ä»¥é€šè¿‡ä»¥ä¸‹æ–¹å¼äº¤ç§Ÿ:\n");
+			sb.append("1ï¼Œç°é‡‘äº¤ç§Ÿ\n");
+			sb.append("  è¯·äº1æ—¥-5æ—¥æ™šä¸Š7ç‚¹-10ç‚¹åˆ°ä¿å®‰å®¤å¤„äº¤ç§Ÿ\n");
+			sb.append("2ï¼Œé“¶è¡Œè½¬è´¦\n");
+			sb.append("  æ‹›å•†é“¶è¡Œæ·±åœ³åˆ†è¡Œè½¦å…¬åº™æ”¯è¡Œ\n");
+			sb.append("  è´¦å·ï¼š4339 2882 9389 234\n");
+			sb.append("  æˆ·åï¼šå¼ ä¸‰\n");
 
-			sb.append("3£¬ÔÚÏßÖ§¸¶\n");
-			sb.append("  °²×°°ü×âÆÅAPP£¬Ê¹ÓÃ½»×â¹¦ÄÜÔÚÏßÖ§¸¶\n");
+			sb.append("3ï¼Œåœ¨çº¿æ”¯ä»˜\n");
+			sb.append("  å®‰è£…åŒ…ç§Ÿå©†APPï¼Œä½¿ç”¨äº¤ç§ŸåŠŸèƒ½åœ¨çº¿æ”¯ä»˜\n");
 			sb.append("\n\n\n");
 
-			sb.append("4£¬Î¢ĞÅÖ§¸¶\n");
-			sb.append("  ¹Ø×¢Î¢ĞÅ¹«ÖÚºÅ£º°ü×âÆÅ\n");
+			sb.append("4ï¼Œå¾®ä¿¡æ”¯ä»˜\n");
+			sb.append("  å…³æ³¨å¾®ä¿¡å…¬ä¼—å·ï¼šåŒ…ç§Ÿå©†\n");
 			sb.append("\n\n\n");
 			esc.addText(sb.toString());
 		}
 	//	esc.addCutPaperAndFeed((byte) 40);
 		Vector<Byte> Command = new Vector<Byte>(4096, 1024);
-		Command = esc.getCommand();// »ñµÃ±à¼­µÄÃüÁîÊı¾İ
+		Command = esc.getCommand();// è·å¾—ç¼–è¾‘çš„å‘½ä»¤æ•°æ®
 		return Command;
 	}
 

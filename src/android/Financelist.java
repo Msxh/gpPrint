@@ -1,4 +1,4 @@
-package org.apache.cordova.gpPrint;
+﻿package org.apache.cordova.gpPrint;
 
 public class Financelist {
 long calclogid;
