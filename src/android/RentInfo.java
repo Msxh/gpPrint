@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 
 import com.gprinterio.GpDevice;
 import com.printer.EscCommand;
+import com.printer.EscCommand.JUSTIFICATION;
 import com.printer.EscCommand.UNDERLINE_MODE;
 
 public class RentInfo {
@@ -267,14 +268,20 @@ public class RentInfo {
 			sb.append("3，在线支付\n");
 			sb.append("  安装包租婆APP，使用交租功能在线支付\n");
 			esc.addText(sb.toString());
-             sb = sb.delete(0, sb.length());
-             Bitmap b = QRcodeCreater.createQRCodeBitmap("您该交房租了 额。。。。");   // 根据参数 获得在线支付信息
-       		esc.addRastBitImage(b);
+			sb = sb.delete(0, sb.length());
+			Bitmap b = QRcodeCreater.createQRCodeBitmap("您该交房租了 额。。。。");
+			esc.addSetJustification(JUSTIFICATION.CENTER);
+			esc.addRastBitImage(b);
+			esc.addSetJustification(JUSTIFICATION.LEFT);
+
 			sb.append("4，微信支付\n");
 			sb.append("  关注微信公众号：包租婆\n");
 			esc.addText(sb.toString());
-			b = QRcodeCreater.createQRCodeBitmap("关注微信号吧。。。。");   // 关注微信公众号
-       		esc.addRastBitImage(b);
+			esc.addSetJustification(JUSTIFICATION.CENTER);
+
+			b = QRcodeCreater.createQRCodeBitmap("关注微信号吧。。。。");
+			esc.addRastBitImage(b);
+			esc.addSetJustification(JUSTIFICATION.LEFT);
 		}
 	//	esc.addCutPaperAndFeed((byte) 40);
 		Vector<Byte> Command = new Vector<Byte>(4096, 1024);
