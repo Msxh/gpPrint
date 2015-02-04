@@ -36,6 +36,7 @@
         <source-file src="src/android/UserInfo.java" target-dir="src/org/apache/cordova/gpPrint" />
         <source-file src="src/android/RentItemList.java" target-dir="src/org/apache/cordova/gpPrint" />
         <source-file src="src/android/Room.java" target-dir="src/org/apache/cordova/gpPrint" />
+		<source-file src="src/android/QRcodeCreater.java" target-dir="src/org/apache/cordova/gpPrint" />
         <source-file src="libs/gprinter.jar" target-dir="libs" />
 
     </platform>
