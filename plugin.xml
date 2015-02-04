@@ -38,6 +38,8 @@
         <source-file src="src/android/Room.java" target-dir="src/org/apache/cordova/gpPrint" />
 		<source-file src="src/android/QRcodeCreater.java" target-dir="src/org/apache/cordova/gpPrint" />
         <source-file src="libs/gprinter.jar" target-dir="libs" />
+		 <source-file src="libs/core-2.2.jar" target-dir="libs" />
+
 
     </platform>
 
